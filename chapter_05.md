@@ -1,4 +1,4 @@
-## 5.4
+## Chapter 5.4
 1. What, if any, is the difference between a point estimator and a function estimator?
 2. What is the bias of a point estimator?
 3. When is an estimator unbiased?
