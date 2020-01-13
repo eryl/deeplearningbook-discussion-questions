@@ -17,7 +17,7 @@
 10. What is the difference between weak consistency and strong consistency?
 11. In the example of estimating the mean of a Gaussian distribution at the end of chapter 5.4.5, why is the estimator asymptotically unbiased but not consistent?
 
-## 5.5
+## Chapter 5.5
 1. Why can we express the maximum likelihood estimator in equation 5.57 as a product of probabilities?
 2. Why doesn’t the optimum of the maximum likelihood estimator (equation 5.57) change when we take the logarithm (equation 5.58)?
 3. What is the motivation for taking the logarithm of the ML estimator?
@@ -28,7 +28,7 @@
 8. Under what conditions is the maximum likelihood estimator consistent?
 9. What is meant by statistical efficiency?
 
-## 5.6
+## Chapter 5.6
 1. What are the different views in frequentist and Bayesian statistics on the parameter value 𝜃 we try to estimate?
 2. What are the different views in frequentist and Bayesian statistics on the data we use for estimating a parameter?
 3. In Bayesian statistics, what is meant by:
@@ -45,7 +45,7 @@
 11. For linear regression with weight decay, if we let the regularization coefficient lambda go to zero, how should that be interpreted in terms of the prior on the weights for Bayesian inference with a Gaussian prior?
 12. What are some examples of regularization penalties which do not correspond to MAP Bayesian inference?
 
-## 5.7
+## Chapter 5.7
 1. Which conditional distribution on y does logistic regression parameterize?
 2. How are feature functions and kernel functions related?
 3. In the kernel trick of SVMs, what is a property of the feature function 𝜙(x) which makes the optimization convex?
@@ -54,7 +54,7 @@
 6. What makes k-nearest neighbour a good learning algorithm?  What are its drawbacks?
 7. What kind of decision boundaries makes decision trees suffer? Why?
 
-## 5.8
+## Chapter 5.8
 1. What is an informal definition of unsupervised learning?
 2. What are some examples of simpler representations (simpler compared to the original representation of a datum x)?
 3. What is meant by independent representations?
@@ -62,17 +62,17 @@
 5. What is the key feature of the covariance matrix of the PCA-transformed data?
 6. What is the difference between a one-hot and a distributed representation?
 
-## 5.9
+## Chapter 5.9
 1. What is the difference between batch gradient descent, minibatch gradient descent and stochastic gradient descent?
 2. Why could it be considered foolhardy and unprincipled to apply gradient descent to nonconvex optimization problems?
 3. From a certain point of view, the asymptotic cost of training a model with SGD is O(1) as a function of m (number of datapoints), what point of view makes it so, and is it  reasonable?
 
-## 5.10
+## Chapter 5.10
 1. What simple ingredients can describe almost all machine learning algorithms?
 2. What simple changes can turn supervised linear regression into an unsupervised problem?
 3. When does a machine learning algorithm need a special-case optimizer and can you give an example of such? 
 
-## 5.11
+## Chapter 5.11
 1. What is meant by the statistical challenge of the curse of dimensionality?
 2. What is the smoothness prior?
 3. What is a prime example of a learning algorithm which relies only on the smoothness prior?
