@@ -10,9 +10,9 @@
 1. Convolutional layers are agnostic of input size (i.e. the width and height of input images to a convolutional layer can vary), but convolutional networks typically have a fixed input size. What is the reason for this?
 2. Lets say we have an greyscale input image of dimension 28*28. Is this statement true or false: The fully connected layer with size 128 (number of neurons) is equvivalent to the convolutional layer with 128 kernels of size 28*28 (assume only valid convolution, no padding).
 3. What assumptions about the important patterns in the input does the following ideas depend on:
-  1. Sparse connections?
-  2. Parameter sharing?
-  3. eqivariance
+    1. Sparse connections?
+    2. Parameter sharing?
+    3. eqivariance
 
 ## Chapter 9.3
 1. Pooling is sometimes referred to as introducing invariance to small translations into convolutional networks. Exactly what is it that we want to allow small translations of?
