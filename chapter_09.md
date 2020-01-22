@@ -27,4 +27,4 @@ Pooling layers are no longer as common as they were when the book was written. C
 ## Chapter 9.4
 1. What is the relationship between the amounts of data required and the strength of a prior, assuming that the prior is a good one? For example, assume we can smoothly interpolate between a convolutional network (strong prior) to the corresponding fully connected network without weight sharing and sparse connections (weak prior). How does this prior affect the amount of data needed to learn a good model?
 
-2.  With the same example of as the previous question, in practice, could the two networks (convolutional vs. fully connected layer) learn the same function (that is, perform the same mapping for any input in the domain)? If yes, how? If no, why not?
+2.  With the same example as in the previous question, in practice, could the two layers (convolutional vs. fully connected) learn the same function (that is, perform the same mapping for any input in the domain)? If yes, how? If no, why not?
