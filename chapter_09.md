@@ -47,8 +47,8 @@ Pooling layers are no longer as common as they were when the book was written. C
 
 ## Chapter 9.9
 1. Coates et al. (2011) use k-means clustering on small image patches to learn convolutional kernels. Compared to learning the kernels using a supervised task, is there a difference in learning to recognize:
-    a. Rare patterns (e.g. leopard spots in a large dataset of natural images)?
-    b. Composite patterns (e.g. a cross)?
+    1. Rare patterns (e.g. leopard spots in a large dataset of natural images)?
+    2. Composite patterns (e.g. a cross)?
 
 
 ## Chapter 9.10
