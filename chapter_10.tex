@@ -68,9 +68,12 @@
       \tvec{h}{t} = \tanh(\vec{b} + W \tvec{h}{t-1} + U\tvec{x}{t})\\
     \tvec{o}{t} = \vec{c} + V\tvec{h}{t}\\
     \tvec{y}{t} = \text{softmax}(\tvec{o}{t})\\
-    L^{(t)} = -\log p_{\text{model}}(\tvec{x}{t+1} | \tvec{o}{t})
+    L^{(t)} = -\sum_{c=1}^C \vec{1}_{\tvec{x}{t+1}} \log p(y_c^{(t)})
 \end{gathered}
 \end{equation}
-
+  (Some notes on the loss, in this case we assume that $\vec{x}$ is a vector encoding of discrete values from the set $C$, if the next $\vec{x}$ is $c$, the indicator function
+  $\vec{1}_{\tvec{x}{t+1}}$ takes the value 1, otherwise 0. This means that the loss
+    will only be for the value of $\tvec{y} {t}$ which corresponds to the
+    probability of the next value of $\vec{x}$)
 
 \end{document}
