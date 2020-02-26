@@ -11,18 +11,18 @@
 \newcommand{\stvec}[3]{{\vec{#1}_{#2}^{(#3)}}}
 
 \begin{document}
-\chapter{Sequence Modelling: Recurrent and Recursive Nets}
+\chapter{Questions for Sequence Modelling: Recurrent and Recursive Nets}
 
-\section{Unfolding Computational Graphs}
+\section{Questions for Unfolding Computational Graphs}
 
-  \subsection{} The authors state that "Much as almost any function can be considered a feedforward neural network, essentially any function involving recurrence can be considered a recurrent neural network." Do you agree with this satement?
-  \subsection{} When predicting the future from the past, an RNN learns to use it's hidden state to summarize the history of observations. This is in general a necessarily lossy summary, since the history sequency can be any length and the hidden state is finite. Give an example when this is irrelevant for the prediction task. Give an example when this make a huge difference.
+  \subsection{} The authors state that \textit{"Much as almost any function can be considered a feed forward neural network, essentially any function involving recurrence can be considered a recurrent neural network."} Do you agree with this statement?
+  \subsection{} When predicting the future from the past, an RNN learns to use its hidden state to summarize the history of observations. This is in general a necessarily lossy summary, since the history sequence can be any length and the hidden state is finite. Give an example when this is irrelevant for the prediction task. Give an example when this make a big Difference.
     \subsection{}  The unfolded view of a neural network illustrate how information flows forward in time. Is this necessarily the same time direction as in the data (i.e. from an observed time-series)? If yes, explain why. If no, give a counter-example.
-    \subsection{}  If we were to imagine neural networks as implementing algorithms using a \href{https://en.wikipedia.org/wiki/Control-flow_graph}{Control-Flow Graph}, how would you characterize the difference between the GFG implemented by a Feedforward Neural Networks compared to a Recurrent Neural Networks?
+    \subsection{}  If we were to imagine neural networks as implementing algorithms using a \href{https://en.wikipedia.org/wiki/Control-flow_graph}{Control-Flow Graph}, how would you characterize the difference between the GFG implemented by a Feed forward Neural Networks compared to a Recurrent Neural Networks?
 
-\section{Recurrent Neural Networks}
+\section{Questions for Recurrent Neural Networks}
 
-\subsection{} The authors assume hyperbolical tangent units, not ReLU which in earlier chapters has been the most common one. Why do you think that is?
+\subsection{} The authors assume hyperbolic tangent units, not ReLU which in earlier chapters has been the most common one. Why do you think that is?
 
 \subsection{} What is the fundamental difference between the two deep RNNs described by the equations \ref{IIR} and \ref{FIR} below?
 
