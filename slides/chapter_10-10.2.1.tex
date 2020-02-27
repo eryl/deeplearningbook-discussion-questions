@@ -1,0 +1,135 @@
+\documentclass{beamer}
+
+\title[DLB 10-10.2.1] % (optional, only for long titles)
+{Deep Learning Book discussion questions}
+\subtitle{Chapter 10-10.2.1}
+\author[Author, Erik] % (optional, for multiple authors)
+{Erik Ylipää\inst{1}}
+\institute[RISE] % (optional)
+{
+  \inst{1}%
+  Research Institutes of Sweden
+}
+
+\renewcommand{\vec}[1]{{\boldsymbol{#1}}}
+\newcommand{\tvec}[2]{{\vec{#1}^{(#2)}}}
+\newcommand{\svec}[2]{{\vec{#1}_{#2}}}
+\newcommand{\stvec}[3]{{\vec{#1}_{#2}^{(#3)}}}
+
+\begin{document}
+\frame{\titlepage}
+
+
+  \begin{frame}
+    \frametitle{Voting results}
+    %Content goes here
+  \end{frame}
+
+\begin{frame}
+  \frametitle{Questions for Unfolding Computational Graphs}
+\begin{itemize}
+  \item The authors state that \textit{"Much as almost any function can be considered a feed forward neural network, essentially any function involving recurrence can be considered a recurrent neural network."} Do you agree with this statement?
+
+  \item When predicting the future from the past, an RNN learns to use its hidden state to summarize the history of observations. This is in general a necessarily lossy summary, since the history sequence can be any length and the hidden state is finite. Give an example when this is irrelevant for the prediction task. Give an example when this make a big difference.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Questions for Recurrent Neural Networks}
+\begin{itemize}
+
+\item What is the fundamental difference between the two deep RNNs described by the equations \ref{IIR} and \ref{FIR} below?
+  \vspace{10mm}
+  \scriptsize
+  \begin{columns}
+      \begin{column}{0.47\textwidth}
+  \begin{equation}
+    \label{IIR}
+\begin{gathered}
+  \stvec{h}{1}{t} = \tanh(\vec{b}_1 + W_1 \stvec{h}{1}{t-1} + U_1\tvec{x}{t})\\
+  \stvec{h}{2}{t} = \tanh(\vec{b}_2 + W_2 \stvec{h}{2}{t-1} + U_2\stvec{h}{1}{t})\\
+  \vdots \\
+    \stvec{h}{l}{t} = \tanh(\vec{b}_l + W_l \stvec{h}{l}{t-1} + U_l\stvec{h}{l-1}{t})\\
+    \tvec{o}{t} = c + V\stvec{h}{l}{t}
+\end{gathered}
+\end{equation}
+\end{column}
+
+      \begin{column}{0.47\textwidth}
+  \begin{equation}
+    \label{FIR}
+\begin{gathered}
+  \stvec{h}{1}{t} = \tanh(\vec{b}_1 + W_1 \tvec{x}{t-1} + U_1\tvec{x}{t})\\
+  \stvec{h}{2}{t} = \tanh(\vec{b}_2 + W_2 \stvec{h}{1}{t-1} + U_2\stvec{h}{1}{t})\\
+  \vdots \\
+    \stvec{h}{l}{t} = \tanh(\vec{b}_l + W_l \stvec{h}{l-1}{t-1} + U_l\stvec{h}{l-1}{t})\\
+    \tvec{o}{t} = c + V\stvec{h}{l}{t}
+\end{gathered}
+\end{equation}
+      \end{column}
+      \end{columns}
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Questions for Unfolding Computational Graphs}
+\begin{itemize}
+    \item  The unfolded view of a neural network illustrate how information flows forward in time. Is this necessarily the same time direction as in the data (i.e. from an observed time-series)? If yes, explain why. If no, give a counter-example.
+
+    \item The authors assume hyperbolic tangent units, not ReLU which in earlier chapters has been the most common one. Why do you think that is?
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Questions for Recurrent Neural Networks}
+\begin{itemize}
+
+  \item
+  A common setup for training RNNs on sequence data (text and time-series) is to use next-step prediction (see equation \ref{NSP} below). In what way (if any) is this different from the network described by figure 10.4 of the book, and is it an application of teacher forcing?
+
+  \begin{equation}
+    \label{NSP}
+    \begin{gathered}
+      \tvec{h}{t} = \tanh(\vec{b} + W \tvec{h}{t-1} + U\tvec{x}{t})\\
+    \tvec{o}{t} = \vec{c} + V\tvec{h}{t}\\
+    \tvec{y}{t} = \text{softmax}(\tvec{o}{t})\\
+    L^{(t)} = -\sum_{c=1}^C \vec{1}_{\tvec{x}{t+1}} \log p(y_c^{(t)})
+\end{gathered}
+  \end{equation}
+  \scriptsize
+  (Some notes on the loss, in this case we assume that $\vec{x}$ is a vector encoding of discrete values from the set $C$, if the next $\vec{x}$ is $c$, the indicator function
+  $\vec{1}_{\tvec{x}{t+1}}$ takes the value 1, otherwise 0. This means that the loss
+    will only be for the value of $\tvec{y} {t}$ which corresponds to the
+    probability of the next value of $\vec{x}$)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Questions for Recurrent Neural Networks}
+\begin{itemize}
+
+    \item  If we were to imagine neural networks as implementing algorithms using a \href{https://en.wikipedia.org/wiki/Control-flow_graph}{Control-Flow Graph}, how would you characterize the difference between the GFG implemented by a Feed forward Neural Networks compared to a Recurrent Neural Networks?
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Questions for Recurrent Neural Networks}
+\begin{itemize}
+
+  \item Below (\ref{NLL}) is a reproduction of equation 10.14 from the book. Under what independence assumptions is it modelling the joint probability $P(y^{(1)}, y^{(2)}, \ldots, y^{(1)})$?
+
+  \begin{equation}
+    \label{NLL}
+    \begin{gathered}
+      -\sum_t \log p_{\text{model}}(y^{(t)} | \{\tvec{x}{1}, \tvec{x}{2}, \ldots, \tvec{x}{t}\}
+\end{gathered}
+\end{equation}
+
+  \end{itemize}
+\end{frame}
+
+
+\end{document}
