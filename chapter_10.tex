@@ -1,6 +1,6 @@
 \documentclass[a4paper]{report}
 \usepackage{amsmath}
-
+\usepackage{amssymb}
 \usepackage{hyperref}
 
 \setcounter{chapter}{9}
@@ -21,8 +21,7 @@
     \subsection{}  If we were to imagine neural networks as implementing algorithms using a \href{https://en.wikipedia.org/wiki/Control-flow_graph}{Control-Flow Graph}, how would you characterize the difference between the GFG implemented by a Feed forward Neural Networks compared to a Recurrent Neural Networks?
 
 \section{Questions for Recurrent Neural Networks}
-
-\subsection{} The authors assume hyperbolic tangent units, not ReLU which in earlier chapters has been the most common one. Why do you think that is?
+{} The authors assume hyperbolic tangent units, not ReLU which in earlier chapters has been the most common one. Why do you think that is?
 
 \subsection{} What is the fundamental difference between the two deep RNNs described by the equations \ref{IIR} and \ref{FIR} below?
 
@@ -76,4 +75,38 @@
     will only be for the value of $\tvec{y} {t}$ which corresponds to the
     probability of the next value of $\vec{x}$)
 
+    \subsection{}
+    The Back-Propgation Through Time algorithm described can train RNNs for arbitrarily long sequences, but in practice it is fundamentally limited by computational resources. What computational resource is the limiting factor, and why is it so?
+    
+    \subsection{}
+    Examine equation 10.21 of the book. Start at $t=1$ and expand the expression forwards in time for a few steps (lets say 3). Can you make any interesting observations about the power of the different terms and factors of the expanded expression?
+
+    \subsection{}
+    A common way of modeling a joint distribution of a sequence is given in equation 10.31. In this case, we use the product rule of probability to factor the conditionals in a forwards-prediction. Imagine instead that we would like model the conditional distribution for arbitrary elments of a sequence, see equation below. How could you model this with one or more RNNs?
+
+    {
+    \[
+    \begin{gathered}
+      P(\mathbb{Y}) = P(\tvec{y}{1}, \ldots, \tvec{y}{\tau}) = \\
+ P(\tvec{y}{t} | \tvec{y}{\tau}, \ldots, \tvec{y}{t+1}, \tvec{y}{t-1}, \ldots, \tvec{y}{1}) \prod_{i=1}^{t-1} P(\tvec{y}{i} | \tvec{y}{i-1}, \ldots, \tvec{y}{1})\prod_{i=t+1}^{\tau} P(\tvec{y}{i} | \tvec{y}{i-1}, \ldots, \tvec{y}{t+1})
+\end{gathered}
+    \]}
+
+    \subsection{}
+    To draw samples from an RNN, the book suggests three different ways to control how many time-steps the sampling is done over. Explain how the Bernoulli and length-prediction methods are actually very similar.
+
+    \subsection{}
+    The book claims that the length-prediction control method needs to also have the predicted length as input. Explain how this is similar to teacher forcing.
+
+    \subsection{}
+    The book claims that the length-prediction control method needs to also have the predicted length as input. Assuming the RNN which uses this control method has hidden-to-hidden recurrence, is it in principle necessary to have the predicted length as an extra input?
+    
+    \subsection{}
+    The book gives two main strategies for conditioning an RNN on some single vector input $\vec{x}$ (itemized list on page 391): As an extra input at each time step or as the initial state $\tvec{h}{0}$. For each of these strategies, explain their drawbacks.
+
+    \subsection{}
+    Figure 10.9 in the book shows an example of an RNN which takes a fixed length vector as input at each time sequence. Can you come up with some other example than image captioning where this would be useful?
+
+    \subsection{}
+    Explain why the RNN in equation 10.8 correspond to the conditional independence assumption in equation 10.35.
 \end{document}
