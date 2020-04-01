@@ -77,7 +77,7 @@
 
     \subsection{}
     The Back-Propgation Through Time algorithm described can train RNNs for arbitrarily long sequences, but in practice it is fundamentally limited by computational resources. What computational resource is the limiting factor, and why is it so?
-    
+
     \subsection{}
     Examine equation 10.21 of the book. Start at $t=1$ and expand the expression forwards in time for a few steps (lets say 3). Can you make any interesting observations about the power of the different terms and factors of the expanded expression?
 
@@ -100,7 +100,7 @@
 
     \subsection{}
     The book claims that the length-prediction control method needs to also have the predicted length as input. Assuming the RNN which uses this control method has hidden-to-hidden recurrence, is it in principle necessary to have the predicted length as an extra input?
-    
+
     \subsection{}
     The book gives two main strategies for conditioning an RNN on some single vector input $\vec{x}$ (itemized list on page 391): As an extra input at each time step or as the initial state $\tvec{h}{0}$. For each of these strategies, explain their drawbacks.
 
@@ -109,4 +109,36 @@
 
     \subsection{}
     Explain why the RNN in equation 10.8 correspond to the conditional independence assumption in equation 10.35.
+
+    \section{Bidirectional RNNs}
+    \subsection{}
+    A bidirectional RNN process a sequence in two intuitive orders, forwards and backwards. Could you use an RNN to process a sequence in some other order? When would you want to do that?
+    \subsection{}
+    In what sense are RNNs applied to images more expensive than CNNs?
+
+    \section{Encoder-Decoder Sequence-to-Sequence Architectures}
+    \subsection{}
+    We could train a sequence-to-sequence model with an auto-encoder objective, where the goal is to
+    reproduce the input (essentially copy the context sequence through the encoder bottleneck).
+    If the sequences are english sentences, what do you think the intermediate
+    representation (the context C) would learn to capture?
+    \subsection{}
+    It has been noted (e.g. Sutskever et al. 2014) that the performance of sequence-to-sequence architectures improves if we reverse the target sequence from the true order (so for translation from english to french, the target sentence in french has its words in reverse order). Why do you think this is the case?
+    \section{Deep Recurrent Networks}
+    \subsection{}
+    Consider the deep RNN depicted in figure 10.13a. Would it still be a \emph{deep} recurrent network if there where also recurrent connections going from $z$ to $h$?
+    \subsection{}
+    Consider figure 10.13b. What would happen if you changed where the delay tap was, so instead of being after the extra hidden recurrent layer, it was before it?
+
+    \section{Recursive Neural Networks}
+    \subsection{}
+    What is the difference between a recursive neural network and a convolutional neural network?
+
+    \section{The Challange of Long-Term Dependencies}
+    \subsection{}
+    In the case of a linear recurrent network (without nonlinear activation functions), the authors explain how looking at the largest eigenvalue of the recurrent matrix we can understand how a signal explodes or vanishes after repeated multiplications with the matrix. For a linear recurrent network this behaviour is the same in the forwards and backwards (computing gradients) direction. For a network with a lonlinear activation function (e.g. tanh), the forwards and backwards path behaves very differently, explain how and why.
+
+    \section{Echo State Networks}
+
+
 \end{document}
