@@ -140,5 +140,34 @@
 
     \section{Echo State Networks}
 
+    \section{Leaky Units and Other Strategies for Multiple Time Scales}
+    \subsection{} Consider the leaky unit $\tvec{u}{t} \leftarrow \alpha \tvec{u}{t-1} + (1-\alpha)\tvec{v}{t}$. Briefly outline what the derivative of some loss at time $t$ with respect to $\tvec{u}{t-3}$ looks like (tip: unfold the recurrence). What is the major difference from a typical RNN?
+
+    \subsection{} Explain how leaky units are related to residual connections of e.g. (\href{https://arxiv.org/abs/1512.03385}{ResNets}).
+
+    \subsection{} The leaky units described by $\tvec{u}{t} \leftarrow \alpha \tvec{u}{t-1} + (1-\alpha)\tvec{v}{t}$ essentially keeps a running average of $\tvec{v}{y}$. What would happen if we instead introduced a new free parameter $\beta$ and had the equation $\tvec{u}{t} \leftarrow \alpha \tvec{u}{t-1} + \beta\tvec{v}{t}$? Would this leaky unit still work?
+
+    \subsection{} Instead of using leaky units, we could actually learn a weighted average over a $k$-length window of data: $\tvec{u}{t} = \sum_{i=0}^{k-1} \alpha_i \tvec{v}{t-i}$, where $0 \leq \alpha_i \leq 1$ and all sum to $1$. The $\alpha$'s could be learnable parameters or calculated by a nerual network layer based on the input. What is the advantage and disadvantage of this setup compared to leaky unit RNNs?
+
+    \subsection{}
+    Skip connections work by \emph{adding} edges to a network, the units can still ignore them (setting the corresponding weights very low). Explain why this could happen.
+
+    \section{The Long Short-Term Memory and Other Gated RNNs}
+
+    \subsection{}
+    In the section on leaky units, it was noted that by setting $\alpha$ close to 1 in the equation $\tvec{u}{t} \leftarrow \alpha \tvec{u}{t-1} + (1-\alpha)\tvec{v}{t}$, the network can learn over longer time spans. How could we initialize an LSTM to bias it towards this behaviour at the start of learning? In other words, how could you set the initial parameters of the forget gate (see equation 10.40) to make it close to 1?
+
+
+    \subsection{}
+    Consider the \emph{``reset''} gate of a GRU (equation 10.47, used in 10.45). Which gate of the LSTM does this gate correspond to (it might help to unroll the GRU and LSTM two time steps)?
+
+    \subsection{}
+    One fundamental difference between an LSTM and a GRU is the ability of LSTMs to implement counters (see the example below) with a high range when the state is of finite precision. What is the reason for this difference (compare equations 10.41 and 10.45)?
+
+
+    \subsection*{Example of how an LSTM can use counters to solve simple problems}
+    \label{csl}
+    Imagine we have a context sensitive language $a^nb^nc^n$, where every sequence with $n$ number of $a$'s is followed by $n$ number of $b$'s and $n$ number of $c$'s (e.g $aabbcc$, $abc$, $aaaaabbbbbccccc$). An LSTM can solve the prediction problem over this language by learning to linearly increase two units for each $a$ observed in the input, serving as counters of the number of $a$'s in the string and then decrease one of them linearly for each $b$ it outputs until it is below a threshold, then linearly decreases the second counter for each $c$ it outputs. See \href{ftp://ftp.idsia.ch/pub/juergen/L-IEEE.pdf}{(Gers 2001)} for further details.
+
 
 \end{document}
