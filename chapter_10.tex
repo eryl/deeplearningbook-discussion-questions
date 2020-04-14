@@ -143,7 +143,7 @@
     \section{Leaky Units and Other Strategies for Multiple Time Scales}
     \subsection{} Consider the leaky unit $\tvec{u}{t} \leftarrow \alpha \tvec{u}{t-1} + (1-\alpha)\tvec{v}{t}$. Briefly outline what the derivative of some loss at time $t$ with respect to $\tvec{u}{t-3}$ looks like (tip: unfold the recurrence). What is the major difference from a typical RNN?
 
-    \subsection{} Explain how leaky units are related to residual connections of e.g. (\href{https://arxiv.org/abs/1512.03385}{ResNets}).
+    \subsection{} Explain how leaky units are related to residual connections of e.g. \href{https://arxiv.org/abs/1512.03385}{ResNets}.
 
     \subsection{} The leaky units described by $\tvec{u}{t} \leftarrow \alpha \tvec{u}{t-1} + (1-\alpha)\tvec{v}{t}$ essentially keeps a running average of $\tvec{v}{y}$. What would happen if we instead introduced a new free parameter $\beta$ and had the equation $\tvec{u}{t} \leftarrow \alpha \tvec{u}{t-1} + \beta\tvec{v}{t}$? Would this leaky unit still work?
 
