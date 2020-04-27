@@ -1,7 +1,5 @@
-\documentclass[a4paper]{report}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{hyperref}
+\documentclass[a4paper]{report} \usepackage{amsmath}
+\usepackage{amssymb} \usepackage{hyperref}
 
 \setcounter{chapter}{9}
 
@@ -15,24 +13,45 @@
 
 \section{Questions for Unfolding Computational Graphs}
 
-  \subsection{} The authors state that \textit{"Much as almost any function can be considered a feed forward neural network, essentially any function involving recurrence can be considered a recurrent neural network."} Do you agree with this statement?
-  \subsection{} When predicting the future from the past, an RNN learns to use its hidden state to summarize the history of observations. This is in general a necessarily lossy summary, since the history sequence can be any length and the hidden state is finite. Give an example when this is irrelevant for the prediction task. Give an example when this make a big Difference.
-    \subsection{}  The unfolded view of a neural network illustrate how information flows forward in time. Is this necessarily the same time direction as in the data (i.e. from an observed time-series)? If yes, explain why. If no, give a counter-example.
-    \subsection{}  If we were to imagine neural networks as implementing algorithms using a \href{https://en.wikipedia.org/wiki/Control-flow_graph}{Control-Flow Graph}, how would you characterize the difference between the GFG implemented by a Feed forward Neural Networks compared to a Recurrent Neural Networks?
+\subsection{}
+The authors state that \textit{"Much as almost any function can be
+  considered a feed forward neural network, essentially any function
+  involving recurrence can be considered a recurrent neural network."}
+Do you agree with this statement?
+\subsection{}
+When predicting the future from the past, an RNN learns to use its
+hidden state to summarize the history of observations. This is in
+general a necessarily lossy summary, since the history sequence can be
+any length and the hidden state is finite. Give an example when this
+is irrelevant for the prediction task. Give an example when this make
+a big Difference.
+\subsection{}
+The unfolded view of a neural network illustrate how information flows
+forward in time. Is this necessarily the same time direction as in the
+data (i.e. from an observed time-series)? If yes, explain why. If no,
+give a counter-example.
+\subsection{}
+If we were to imagine neural networks as implementing algorithms using
+a \href{https://en.wikipedia.org/wiki/Control-flow_graph}{Control-Flow
+  Graph}, how would you characterize the difference between the GFG
+implemented by a Feed forward Neural Networks compared to a Recurrent
+Neural Networks?
 
 \section{Questions for Recurrent Neural Networks}
-{} The authors assume hyperbolic tangent units, not ReLU which in earlier chapters has been the most common one. Why do you think that is?
+{} The authors assume hyperbolic tangent units, not ReLU which in
+earlier chapters has been the most common one. Why do you think that
+is?
 
 \subsection{} What is the fundamental difference between the two deep RNNs described by the equations \ref{IIR} and \ref{FIR} below?
 
   \begin{equation}
     \label{IIR}
 \begin{gathered}
-  \stvec{h}{1}{t} = \tanh(\vec{b}_1 + W_1 \stvec{h}{1}{t-1} + U_1\tvec{x}{t})\\
-  \stvec{h}{2}{t} = \tanh(\vec{b}_2 + W_2 \stvec{h}{2}{t-1} + U_2\stvec{h}{1}{t})\\
-  \vdots \\
-    \stvec{h}{l}{t} = \tanh(\vec{b}_l + W_l \stvec{h}{l}{t-1} + U_l\stvec{h}{l-1}{t})\\
-    \tvec{o}{t} = c + V\stvec{h}{l}{t}
+  \stvec{h}{1}{t} = \tanh(\vec{b}_1 + W_1 \stvec{h}{1}{t-1} +
+  U_1\tvec{x}{t})\\ \stvec{h}{2}{t} = \tanh(\vec{b}_2 + W_2
+  \stvec{h}{2}{t-1} + U_2\stvec{h}{1}{t})\\ \vdots \\ \stvec{h}{l}{t}
+  = \tanh(\vec{b}_l + W_l \stvec{h}{l}{t-1} +
+  U_l\stvec{h}{l-1}{t})\\ \tvec{o}{t} = c + V\stvec{h}{l}{t}
 \end{gathered}
 \end{equation}
 
@@ -41,133 +60,279 @@
   \begin{equation}
     \label{FIR}
 \begin{gathered}
-  \stvec{h}{1}{t} = \tanh(\vec{b}_1 + W_1 \tvec{x}{t-1} + U_1\tvec{x}{t})\\
-  \stvec{h}{2}{t} = \tanh(\vec{b}_2 + W_2 \stvec{h}{1}{t-1} + U_2\stvec{h}{1}{t})\\
-  \vdots \\
-    \stvec{h}{l}{t} = \tanh(\vec{b}_l + W_l \stvec{h}{l-1}{t-1} + U_l\stvec{h}{l-1}{t})\\
-    \tvec{o}{t} = c + V\stvec{h}{l}{t}
-\end{gathered}
-\end{equation}
-
-  \subsection{} Below (\ref{NLL}) is a reproduction of equation 10.14 from the book. Under what independence assumptions is it modelling the joint probability $P(y^{(1)}, y^{(2)}, \ldots, y^{(1)})$?
-
-  \begin{equation}
-    \label{NLL}
-    \begin{gathered}
-      -\sum_t \log p_{\text{model}}(y^{(t)} | \{\tvec{x}{1}, \tvec{x}{2}, \ldots, \tvec{x}{t}\}
+  \stvec{h}{1}{t} = \tanh(\vec{b}_1 + W_1 \tvec{x}{t-1} +
+  U_1\tvec{x}{t})\\ \stvec{h}{2}{t} = \tanh(\vec{b}_2 + W_2
+  \stvec{h}{1}{t-1} + U_2\stvec{h}{1}{t})\\ \vdots \\ \stvec{h}{l}{t}
+  = \tanh(\vec{b}_l + W_l \stvec{h}{l-1}{t-1} +
+  U_l\stvec{h}{l-1}{t})\\ \tvec{o}{t} = c + V\stvec{h}{l}{t}
 \end{gathered}
 \end{equation}
 
   \subsection{}
-  A common setup for training RNNs on sequence data (text and time-series) is to use next-step prediction (see equation \ref{NSP} below). In what way (if any) is this different from the network described by figure 10.4 of the book, and is it an application of teacher forcing?
+  Below (\ref{NLL}) is a reproduction of equation 10.14 from the
+  book. Under what independence assumptions is it modelling the joint
+  probability $P(y^{(1)}, y^{(2)}, \ldots, y^{(1)})$?
+
+  \begin{equation}
+    \label{NLL}
+    \begin{gathered}
+      -\sum_t \log p_{\text{model}}(y^{(t)} | \{\tvec{x}{1},
+      \tvec{x}{2}, \ldots, \tvec{x}{t}\}
+\end{gathered}
+\end{equation}
+
+  \subsection{}
+  A common setup for training RNNs on sequence data (text and
+  time-series) is to use next-step prediction (see equation \ref{NSP}
+  below). In what way (if any) is this different from the network
+  described by figure 10.4 of the book, and is it an application of
+  teacher forcing?
 
   \begin{equation}
     \label{NSP}
     \begin{gathered}
-      \tvec{h}{t} = \tanh(\vec{b} + W \tvec{h}{t-1} + U\tvec{x}{t})\\
-    \tvec{o}{t} = \vec{c} + V\tvec{h}{t}\\
-    \tvec{y}{t} = \text{softmax}(\tvec{o}{t})\\
-    L^{(t)} = -\sum_{c=1}^C \vec{1}_{\tvec{x}{t+1}} \log p(y_c^{(t)})
+      \tvec{h}{t} = \tanh(\vec{b} + W \tvec{h}{t-1} +
+      U\tvec{x}{t})\\ \tvec{o}{t} = \vec{c} +
+      V\tvec{h}{t}\\ \tvec{y}{t} =
+      \text{softmax}(\tvec{o}{t})\\ L^{(t)} = -\sum_{c=1}^C
+      \vec{1}_{\tvec{x}{t+1}} \log p(y_c^{(t)})
 \end{gathered}
 \end{equation}
-  (Some notes on the loss, in this case we assume that $\vec{x}$ is a vector encoding of discrete values from the set $C$, if the next $\vec{x}$ is $c$, the indicator function
-  $\vec{1}_{\tvec{x}{t+1}}$ takes the value 1, otherwise 0. This means that the loss
-    will only be for the value of $\tvec{y} {t}$ which corresponds to the
-    probability of the next value of $\vec{x}$)
+  (Some notes on the loss, in this case we assume that $\vec{x}$ is a
+  vector encoding of discrete values from the set $C$, if the next
+  $\vec{x}$ is $c$, the indicator function $\vec{1}_{\tvec{x}{t+1}}$
+  takes the value 1, otherwise 0. This means that the loss will only
+  be for the value of $\tvec{y} {t}$ which corresponds to the
+  probability of the next value of $\vec{x}$)
 
     \subsection{}
-    The Back-Propgation Through Time algorithm described can train RNNs for arbitrarily long sequences, but in practice it is fundamentally limited by computational resources. What computational resource is the limiting factor, and why is it so?
+    The Back-Propgation Through Time algorithm described can train
+    RNNs for arbitrarily long sequences, but in practice it is
+    fundamentally limited by computational resources. What
+    computational resource is the limiting factor, and why is it so?
 
     \subsection{}
-    Examine equation 10.21 of the book. Start at $t=1$ and expand the expression forwards in time for a few steps (lets say 3). Can you make any interesting observations about the power of the different terms and factors of the expanded expression?
+    Examine equation 10.21 of the book. Start at $t=1$ and expand the
+    expression forwards in time for a few steps (lets say 3). Can you
+    make any interesting observations about the power of the different
+    terms and factors of the expanded expression?
 
     \subsection{}
-    A common way of modeling a joint distribution of a sequence is given in equation 10.31. In this case, we use the product rule of probability to factor the conditionals in a forwards-prediction. Imagine instead that we would like model the conditional distribution for arbitrary elments of a sequence, see equation below. How could you model this with one or more RNNs?
+    A common way of modeling a joint distribution of a sequence is
+    given in equation 10.31. In this case, we use the product rule of
+    probability to factor the conditionals in a
+    forwards-prediction. Imagine instead that we would like model the
+    conditional distribution for arbitrary elments of a sequence, see
+    equation below. How could you model this with one or more RNNs?
 
     {
     \[
     \begin{gathered}
-      P(\mathbb{Y}) = P(\tvec{y}{1}, \ldots, \tvec{y}{\tau}) = \\
- P(\tvec{y}{t} | \tvec{y}{\tau}, \ldots, \tvec{y}{t+1}, \tvec{y}{t-1}, \ldots, \tvec{y}{1}) \prod_{i=1}^{t-1} P(\tvec{y}{i} | \tvec{y}{i-1}, \ldots, \tvec{y}{1})\prod_{i=t+1}^{\tau} P(\tvec{y}{i} | \tvec{y}{i-1}, \ldots, \tvec{y}{t+1})
+      P(\mathbb{Y}) = P(\tvec{y}{1}, \ldots, \tvec{y}{\tau}) =
+      \\ P(\tvec{y}{t} | \tvec{y}{\tau}, \ldots, \tvec{y}{t+1},
+      \tvec{y}{t-1}, \ldots, \tvec{y}{1}) \prod_{i=1}^{t-1}
+      P(\tvec{y}{i} | \tvec{y}{i-1}, \ldots,
+      \tvec{y}{1})\prod_{i=t+1}^{\tau} P(\tvec{y}{i} | \tvec{y}{i-1},
+      \ldots, \tvec{y}{t+1})
 \end{gathered}
     \]}
 
     \subsection{}
-    To draw samples from an RNN, the book suggests three different ways to control how many time-steps the sampling is done over. Explain how the Bernoulli and length-prediction methods are actually very similar.
+    To draw samples from an RNN, the book suggests three different
+    ways to control how many time-steps the sampling is done
+    over. Explain how the Bernoulli and length-prediction methods are
+    actually very similar.
 
     \subsection{}
-    The book claims that the length-prediction control method needs to also have the predicted length as input. Explain how this is similar to teacher forcing.
+    The book claims that the length-prediction control method needs to
+    also have the predicted length as input. Explain how this is
+    similar to teacher forcing.
 
     \subsection{}
-    The book claims that the length-prediction control method needs to also have the predicted length as input. Assuming the RNN which uses this control method has hidden-to-hidden recurrence, is it in principle necessary to have the predicted length as an extra input?
+    The book claims that the length-prediction control method needs to
+    also have the predicted length as input. Assuming the RNN which
+    uses this control method has hidden-to-hidden recurrence, is it in
+    principle necessary to have the predicted length as an extra
+    input?
 
     \subsection{}
-    The book gives two main strategies for conditioning an RNN on some single vector input $\vec{x}$ (itemized list on page 391): As an extra input at each time step or as the initial state $\tvec{h}{0}$. For each of these strategies, explain their drawbacks.
+    The book gives two main strategies for conditioning an RNN on some
+    single vector input $\vec{x}$ (itemized list on page 391): As an
+    extra input at each time step or as the initial state
+    $\tvec{h}{0}$. For each of these strategies, explain their
+    drawbacks.
 
     \subsection{}
-    Figure 10.9 in the book shows an example of an RNN which takes a fixed length vector as input at each time sequence. Can you come up with some other example than image captioning where this would be useful?
+    Figure 10.9 in the book shows an example of an RNN which takes a
+    fixed length vector as input at each time sequence. Can you come
+    up with some other example than image captioning where this would
+    be useful?
 
     \subsection{}
-    Explain why the RNN in equation 10.8 correspond to the conditional independence assumption in equation 10.35.
+    Explain why the RNN in equation 10.8 correspond to the conditional
+    independence assumption in equation 10.35.
 
     \section{Bidirectional RNNs}
     \subsection{}
-    A bidirectional RNN process a sequence in two intuitive orders, forwards and backwards. Could you use an RNN to process a sequence in some other order? When would you want to do that?
+    A bidirectional RNN process a sequence in two intuitive orders,
+    forwards and backwards. Could you use an RNN to process a sequence
+    in some other order? When would you want to do that?
     \subsection{}
     In what sense are RNNs applied to images more expensive than CNNs?
 
     \section{Encoder-Decoder Sequence-to-Sequence Architectures}
     \subsection{}
-    We could train a sequence-to-sequence model with an auto-encoder objective, where the goal is to
-    reproduce the input (essentially copy the context sequence through the encoder bottleneck).
-    If the sequences are english sentences, what do you think the intermediate
-    representation (the context C) would learn to capture?
+    We could train a sequence-to-sequence model with an auto-encoder
+    objective, where the goal is to reproduce the input (essentially
+    copy the context sequence through the encoder bottleneck).  If the
+    sequences are english sentences, what do you think the
+    intermediate representation (the context C) would learn to
+    capture?
     \subsection{}
-    It has been noted (e.g. Sutskever et al. 2014) that the performance of sequence-to-sequence architectures improves if we reverse the target sequence from the true order (so for translation from english to french, the target sentence in french has its words in reverse order). Why do you think this is the case?
+    It has been noted (e.g. Sutskever et al. 2014) that the
+    performance of sequence-to-sequence architectures improves if we
+    reverse the target sequence from the true order (so for
+    translation from english to french, the target sentence in french
+    has its words in reverse order). Why do you think this is the
+    case?
     \section{Deep Recurrent Networks}
     \subsection{}
-    Consider the deep RNN depicted in figure 10.13a. Would it still be a \emph{deep} recurrent network if there where also recurrent connections going from $z$ to $h$?
+    Consider the deep RNN depicted in figure 10.13a. Would it still be
+    a \emph{deep} recurrent network if there where also recurrent
+    connections going from $z$ to $h$?
     \subsection{}
-    Consider figure 10.13b. What would happen if you changed where the delay tap was, so instead of being after the extra hidden recurrent layer, it was before it?
+    Consider figure 10.13b. What would happen if you changed where the
+    delay tap was, so instead of being after the extra hidden
+    recurrent layer, it was before it?
 
     \section{Recursive Neural Networks}
     \subsection{}
-    What is the difference between a recursive neural network and a convolutional neural network?
+    What is the difference between a recursive neural network and a
+    convolutional neural network?
 
     \section{The Challenge of Long-Term Dependencies}
     \subsection{}
-    In the case of a linear recurrent network (without nonlinear activation functions), the authors explain how by looking at the largest eigenvalue of the recurrent matrix we can understand how a signal explodes or vanishes after repeated multiplications with the matrix. For a linear recurrent network this behaviour is the same in the forwards and backwards (computing gradients) direction. For a network with a nonlinear activation function (e.g. tanh), the forwards and backwards path behaves very differently, explain how and why.
+    In the case of a linear recurrent network (without nonlinear
+    activation functions), the authors explain how by looking at the
+    largest eigenvalue of the recurrent matrix we can understand how a
+    signal explodes or vanishes after repeated multiplications with
+    the matrix. For a linear recurrent network this behaviour is the
+    same in the forwards and backwards (computing gradients)
+    direction. For a network with a nonlinear activation function
+    (e.g. tanh), the forwards and backwards path behaves very
+    differently, explain how and why.
 
     \section{Echo State Networks}
 
     \section{Leaky Units and Other Strategies for Multiple Time Scales}
-    \subsection{} Consider the leaky unit $\tvec{u}{t} \leftarrow \alpha \tvec{u}{t-1} + (1-\alpha)\tvec{v}{t}$. Briefly outline what the derivative of some loss at time $t$ with respect to $\tvec{u}{t-3}$ looks like (tip: unfold the recurrence). What is the major difference from a typical RNN?
-
-    \subsection{} Explain how leaky units are related to residual connections of e.g. \href{https://arxiv.org/abs/1512.03385}{ResNets}.
-
-    \subsection{} The leaky units described by $\tvec{u}{t} \leftarrow \alpha \tvec{u}{t-1} + (1-\alpha)\tvec{v}{t}$ essentially keeps a running average of $\tvec{v}{y}$. What would happen if we instead introduced a new free parameter $\beta$ and had the equation $\tvec{u}{t} \leftarrow \alpha \tvec{u}{t-1} + \beta\tvec{v}{t}$? Would this leaky unit still work?
-
-    \subsection{} Instead of using leaky units, we could actually learn a weighted average over a $k$-length window of data: $\tvec{u}{t} = \sum_{i=0}^{k-1} \alpha_i \tvec{v}{t-i}$, where $0 \leq \alpha_i \leq 1$ and all sum to $1$. The $\alpha$'s could be learnable parameters or calculated by a nerual network layer based on the input. What is the advantage and disadvantage of this setup compared to leaky unit RNNs?
+    \subsection{}
+    Consider the leaky unit $\tvec{u}{t} \leftarrow \alpha
+    \tvec{u}{t-1} + (1-\alpha)\tvec{v}{t}$. Briefly outline what the
+    derivative of some loss at time $t$ with respect to
+    $\tvec{u}{t-3}$ looks like (tip: unfold the recurrence). What is
+    the major difference from a typical RNN?
 
     \subsection{}
-    Skip connections work by \emph{adding} edges to a network, the units can still ignore them (setting the corresponding weights very low). Explain why this could happen.
+    Explain how leaky units are related to residual connections of
+    e.g. \href{https://arxiv.org/abs/1512.03385}{ResNets}.
+
+    \subsection{}
+    The leaky units described by $\tvec{u}{t} \leftarrow \alpha
+    \tvec{u}{t-1} + (1-\alpha)\tvec{v}{t}$ essentially keeps a running
+    average of $\tvec{v}{y}$. What would happen if we instead
+    introduced a new free parameter $\beta$ and had the equation
+    $\tvec{u}{t} \leftarrow \alpha \tvec{u}{t-1} + \beta\tvec{v}{t}$?
+    Would this leaky unit still work?
+
+    \subsection{}
+    Instead of using leaky units, we could actually learn a weighted
+    average over a $k$-length window of data: $\tvec{u}{t} =
+    \sum_{i=0}^{k-1} \alpha_i \tvec{v}{t-i}$, where $0 \leq \alpha_i
+    \leq 1$ and all sum to $1$. The $\alpha$'s could be learnable
+    parameters or calculated by a nerual network layer based on the
+    input. What is the advantage and disadvantage of this setup
+    compared to leaky unit RNNs?
+
+    \subsection{}
+    Skip connections work by \emph{adding} edges to a network, the
+    units can still ignore them (setting the corresponding weights
+    very low). Explain why this could happen.
 
     \section{The Long Short-Term Memory and Other Gated RNNs}
 
     \subsection{}
-    In the section on leaky units, it was noted that by setting $\alpha$ close to 1 in the equation $\tvec{u}{t} \leftarrow \alpha \tvec{u}{t-1} + (1-\alpha)\tvec{v}{t}$, the network can learn over longer time spans. How could we initialize an LSTM to bias it towards this behaviour at the start of learning? In other words, how could you set the initial parameters of the forget gate (see equation 10.40) to make it close to 1?
+    In the section on leaky units, it was noted that by setting
+    $\alpha$ close to 1 in the equation $\tvec{u}{t} \leftarrow \alpha
+    \tvec{u}{t-1} + (1-\alpha)\tvec{v}{t}$, the network can learn over
+    longer time spans. How could we initialize an LSTM to bias it
+    towards this behaviour at the start of learning? In other words,
+    how could you set the initial parameters of the forget gate (see
+    equation 10.40) to make it close to 1?
 
 
     \subsection{}
-    Consider the \emph{``reset''} gate of a GRU (equation 10.47, used in 10.45). Which gate of the LSTM does this gate correspond to (it might help to unroll the GRU and LSTM two time steps)?
+    Consider the \emph{``reset''} gate of a GRU (equation 10.47, used
+    in 10.45). Which gate of the LSTM does this gate correspond to (it
+    might help to unroll the GRU and LSTM two time steps)?
 
     \subsection{}
-    One fundamental difference between an LSTM and a GRU is the ability of LSTMs to implement counters (see the example below) with a high range when the state is of finite precision. What is the reason for this difference (compare equations 10.41 and 10.45)?
+    One fundamental difference between an LSTM and a GRU is the
+    ability of LSTMs to implement counters (see the example below)
+    with a high range when the state is of finite precision. What is
+    the reason for this difference (compare equations 10.41 and
+    10.45)?
 
 
     \subsection*{Example of how an LSTM can use counters to solve simple problems}
     \label{csl}
-    Imagine we have a context sensitive language $a^nb^nc^n$, where every sequence with $n$ number of $a$'s is followed by $n$ number of $b$'s and $n$ number of $c$'s (e.g $aabbcc$, $abc$, $aaaaabbbbbccccc$). An LSTM can solve the prediction problem over this language by learning to linearly increase two units for each $a$ observed in the input, serving as counters of the number of $a$'s in the string and then decrease one of them linearly for each $b$ it outputs until it is below a threshold, then linearly decreases the second counter for each $c$ it outputs. See \href{ftp://ftp.idsia.ch/pub/juergen/L-IEEE.pdf}{(Gers 2001)} for further details.
+    Imagine we have a context sensitive language $a^nb^nc^n$, where
+    every sequence with $n$ number of $a$'s is followed by $n$ number
+    of $b$'s and $n$ number of $c$'s (e.g $aabbcc$, $abc$,
+    $aaaaabbbbbccccc$). An LSTM can solve the prediction problem over
+    this language by learning to linearly increase two units for each
+    $a$ observed in the input, serving as counters of the number of
+    $a$'s in the string and then decrease one of them linearly for
+    each $b$ it outputs until it is below a threshold, then linearly
+    decreases the second counter for each $c$ it outputs. See
+    \href{ftp://ftp.idsia.ch/pub/juergen/L-IEEE.pdf}{(Gers 2001)} for
+    further details.
 
 
+    \section{Optimization for Long-Term Dependencies}
+    \subsection{}
+    Explain why element-wise clipping of gradient is not aligned with
+    the true gradient or the minibatch.
+
+    \section{Explicit Memory}
+    \subsection{}
+    Why is it difficult to optimize algorithms which produce exact
+    integer addresses?
+
+    \subsection{}
+    In which sense would you say LSTMs differ from the explicit memory
+    architectures discussed?
+
+    \subsection{}
+    Two different memory addressing mechanisms are discussed:
+    \textbf{content-based} and \textbf{location-based}. One of these
+    methods requires the number of memory locations to be fixed, the
+    other doesn't. Which is which, and why is this the case?
+
+    \subsection{}
+    If you where to characterize the LSTM as an explicit memory
+    network, what would you say the adressing mechanism is?
+
+    \subsection*{Comments on vector-memory cells}
+    In the original LSTM paper by Hochreiter and Schmidhuber from 1997
+    explicitly point out that each pair of input/output gates (they
+    only had two) can control a set of cells (Section 4: Memory cell
+    blocks). This is exactly the same as \emph{``memory cells are
+      typically augmented to contain a vector''}. Hochreiter and
+    Schmidhuber point directly to the same motivation as in the
+    chapter in the book: computational efficiency.  In the paper they
+    at most have two cells per memory block, but points out many times
+    that this is not a limitation of the model. Later works didn't
+    take this up until the recent years where this LSTM version has
+    been rediscovered. It goes to show how many cite a work without
+    reading it in detail...
 \end{document}
