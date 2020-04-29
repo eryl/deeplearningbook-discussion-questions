@@ -6,21 +6,21 @@
 
   @article{shazeer2017outrageously,
   title={Outrageously large neural networks: The sparsely-gated mixture-of-experts layer},
-  author={Shazeer, Noam and Mirhoseini, Azalia and Maziarz, Krzysztof and Davis, Andy and Le, Quoc and Hinton, Geoffrey and Dean, Jeff},
+  author={Shazeer, Noam and others},
   journal={arXiv preprint arXiv:1701.06538},
   year={2017}
 }
 
 @article{bahdanau2014neural,
   title={Neural machine translation by jointly learning to align and translate},
-  author={Bahdanau, Dzmitry and Cho, Kyunghyun and Bengio, Yoshua},
+  author={Bahdanau, Dzmitry and others},
   journal={arXiv preprint arXiv:1409.0473},
   year={2014}
 }
 
 @article{graves2016hybrid,
   title={Hybrid computing using a neural network with dynamic external memory},
-  author={Graves, Alex and Wayne, Greg and Reynolds, Malcolm and Harley, Tim and Danihelka, Ivo and Grabska-Barwi{\'n}ska, Agnieszka and Colmenarejo, Sergio G{\'o}mez and Grefenstette, Edward and Ramalho, Tiago and Agapiou, John and others},
+  author={Graves, Alex and others},
   journal={Nature},
   volume={538},
   number={7626},
@@ -192,7 +192,9 @@
     \end{columns}
     \vfill
     \tiny \bibentry{shazeer2017outrageously}
+
     \tiny \bibentry{bahdanau2014neural}
+
     \tiny \bibentry{graves2016hybrid}
   \end{frame}
 
@@ -355,14 +357,27 @@
   \frametitle{General attention framework}
   \begin{itemize}
   \item Up until now we have assumed that the vectors we perform the weighted sum on are the same as those used as \emph{queries}. This doesn't have to be the case. A generalized attention function is typically one which takes three arguments
-    \[ f(\mathbb{Q}, \mathbb{K}, \mathbb{V}) \]
-    \begin{description}
-     \item[$\mathbb{Q}$] The query set, each element of this set has a corresponding element in  $\mathbb{V}o$
-     \item[$\mathbb{K}$] The key set. Each element here will produce one weighted vector using dot-product attention with the elements in the query set to weight all elements in the value set.
-       \item[$\mathbb{V}$] The value set. These are the vectors we perform the weighted sum on using the attention scores calculated based on the queries and keys.
-     \end{description}
 
-   \end{itemize}
+    \[ f(\mathbb{Q}, \mathbb{K}, \mathbb{V}) \]
+
+   {\footnotesize
+  \item[$\mathbb{Q}$] The query set, each element of this set has a
+    corresponding element in $\mathbb{V}$. We can think of this as how
+    each element of our input set \emph{looks} to the attention
+    function. Another way to think about it is as an indexing set for
+    $\mathbb{V}$.
+  \item[$\mathbb{K}$] The key set. We can think of this as being
+    \emph{template} vectors the attention function uses to determine
+    what to attend to. Each element of $\mathbb{K}$ will be used to
+    produce one weighted sum of the vectors in $\mathbb{V}$, so the
+    output of our attention will have as many vectors as there are
+    elements of $\mathbb{K}$.
+     \item[$\mathbb{V}$] The value set. These are the vectors we
+       perform the weighted sum on using the attention scores
+       calculated based on the queries and keys.
+}
+    \end{itemize}
+
 
 \end{frame}
 
