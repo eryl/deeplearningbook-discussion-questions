@@ -356,11 +356,11 @@
   \begin{itemize}
   \item Up until now we have assumed that the vectors we perform the weighted sum on are the same as those used as \emph{queries}. This doesn't have to be the case. A generalized attention function is typically one which takes three arguments
     \[ f(\mathbb{Q}, \mathbb{K}, \mathbb{V}) \]
-    \begin{describe}
-     \item[$\mathbb{Q}$] The query set, each element of this set has a corresponding element in $\mathbb{V}$
-     \item[$\mathbb{K}$] The key set. Each element here will produce one weighted vector using dot-product attention with the elements in the query set to weight all elements in the value set
-       \item[$\mathbb{V}$] The value set. These are the vectors we perform the weighted sum on
-     \end{describe}
+    \begin{description}
+     \item[$\mathbb{Q}$] The query set, each element of this set has a corresponding element in  $\mathbb{V}o$
+     \item[$\mathbb{K}$] The key set. Each element here will produce one weighted vector using dot-product attention with the elements in the query set to weight all elements in the value set.
+       \item[$\mathbb{V}$] The value set. These are the vectors we perform the weighted sum on using the attention scores calculated based on the queries and keys.
+     \end{description}
 
    \end{itemize}
 
